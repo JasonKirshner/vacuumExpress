@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Str;
 
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$database = substr($url["path"], 1);
+
+
 return [
 
     /*
@@ -37,22 +45,13 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('mysql://b4aa8e45c817d6:d1f11e8a@us-cdbr-iron-east-02.cleardb.net/heroku_397bc6964b0e051?reconnect=true'),
-            // 'host' => env('DB_HOST', 'us-cdbr-iron-east-02.cleardb.net'),
-            // 'port' => env('DB_PORT', ''),
-            // 'database' => env('DB_DATABASE', 'heroku_397bc6964b0e051'),
-            // 'username' => env('DB_USERNAME', 'b4aa8e45c817d6'),
-            // 'password' => env('DB_PASSWORD', 'd1f11e8a'),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'host' => $host,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            // 'options' => extension_loaded('pdo_mysql') ? array_filter([
-            //     PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            // ]) : [],
+            'prefix' => ''
         ],
 
     ],
