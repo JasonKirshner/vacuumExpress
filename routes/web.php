@@ -16,4 +16,4 @@ Route::get('/', function () {
 });
 
 Route::view('/cart', 'cart.index');
-Route::view('/cartcont', 'CartController@index');
+Route::get('/cartcont', 'CartController@index');
