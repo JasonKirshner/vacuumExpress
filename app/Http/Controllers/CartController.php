@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use DB;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -24,9 +25,7 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
+    { }
 
     /**
      * Store a newly created resource in storage.
@@ -47,7 +46,7 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        //
+        //return view('cart.', ['user' => User::findOrFail($id)]);
     }
 
     /**
@@ -81,6 +80,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cart::findOrFail($id)->delete();
+        $deleted = 'Cart emptied';
+        return view('cart.destroy', compact('deleted'));
     }
 }
