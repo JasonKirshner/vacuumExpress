@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/cart', 'CartController@index');
+Route::get('/empty', 'CartController@destroy');
