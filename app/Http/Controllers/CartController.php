@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -14,8 +15,7 @@ class CartController extends Controller
     public function index()
     {
         $cart = Cart::all();
-        // return view('cart.index', compact('cart'));
-        return $cart;
+        return view('cart.index', compact('cart'));
     }
 
     /**
