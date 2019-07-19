@@ -13,7 +13,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Cart::all()->toArray();
+        $cart = Cart::all();
         // return view('cart.index', compact('cart'));
         return $cart;
     }
