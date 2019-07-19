@@ -14,7 +14,8 @@ class CartController extends Controller
     public function index()
     {
         $cart = Cart::all()->toArray();
-		return view('cart.index', compact('cart'));
+        // return view('cart.index', compact('cart'));
+        return $cart;
     }
 
     /**
