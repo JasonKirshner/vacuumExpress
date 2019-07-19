@@ -83,14 +83,6 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
-                <div>
-                    <?php 
-                        $cart = App\Cart::all();
-                        foreach($cart as $item) {
-                            echo $item;
-                        }
-                    ?>
-                </div>
             </div>
         </div>
     </body>
