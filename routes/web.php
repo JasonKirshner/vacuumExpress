@@ -15,5 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/cart', 'cart.index');
-Route::get('/cartcont', 'CartController@index');
+Route::get('/cart', 'CartController@index');
