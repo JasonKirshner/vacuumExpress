@@ -14,6 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/cart', 'CartController@index');
-Route::get('/empty', 'CartController@destroy');

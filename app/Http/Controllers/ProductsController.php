@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Products;
+use DB;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductsController extends Controller
 {
@@ -13,7 +16,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products = Products::all();
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -54,9 +58,30 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $attr)
     {
-        //
+        try {
+            $product = Products::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return $e;
+        }
+
+        if (isset($attr['name']))
+            $product->ProductName = $attr['name'];
+
+        if (isset($attr['desc']))
+            $product->Description = $attr['desc'];
+
+        if (isset($attr['price']))
+            $product->Price = $attr['price'];
+
+        if (isset($attr['quant']))
+            $product->Quantity = $attr['quant'];
+
+        if (isset($attr['name']))
+            $product->ProductName = $attr['name'];
+
+        $product->save();
     }
 
     /**
