@@ -18,7 +18,7 @@ class CreateCartItemsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('cart_id');
             $table->unsignedInteger('quantity');
-            $table->dateTime('created_at');
+            $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
