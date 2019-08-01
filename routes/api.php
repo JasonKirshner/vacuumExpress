@@ -13,10 +13,26 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/cart', 'CartController@index');
-Route::get('/empty', 'CartController@destroy');
-Route::get('/products', 'ProductsController@index');
+Route::get('login', 'LoginController@authenticate');
+Route::post('register', 'RegisterController@');
+Route::get('users/{id}', 'UserController@show');
+Route::put('users/{id}', 'UserController@update');
+
+Route::get('products', 'ProductController@index');
+Route::post('products', 'ProductController@store');
+Route::get('products/{id}', 'ProductController@show');
+Route::put('products/{id}', 'ProductController@update');
+
+Route::get('carts', 'CartController@index');
+Route::post('carts', 'CartController@store');
+Route::get('carts/{id}', 'CartController@show');
+Route::put('carts/{id}', 'CartController@update');
+
+Route::get('cart-items', 'CartItemController@index');
+Route::post('cart-items', 'CartItemController@store');
+Route::get('cart-items/{id}', 'CartItemController@show');
+Route::put('cart-items/{id}', 'CartItemController@update');
