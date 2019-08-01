@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\CartItem;
 use Illuminate\Http\Request;
+use App\Http\Requests\CartItemStoreRequest;
 
-class CartController extends Controller
+class CartItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return Cart::all()->toJson();
+        return CartItem::all()->toJson();
     }
 
     /**
@@ -23,22 +24,24 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CartItemStoreRequest $request)
     {
-        $validated = $request->validate(['user_id' => 'required']);
-
-        return Cart::create(['user_id' => $validated['user_id']])->toJson();
+        return CartItem::create([
+            'product_id' => $request['product_id'],
+            'cart_id' => $request['cart_id'],
+            'quantity' => $request['quantity']
+        ])->toJson();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $cart_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($cart_id)
     {
-        return Cart::findOrFail($id)->toJson();
+        return CartItem::where('cart_id', $cart_id)->get()->toJson();
     }
 
     /**
@@ -50,9 +53,9 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate(['user_id' => 'required']);
+        $validated = $request->validate(['quantity' => 'required|min:1|max:20']);
 
-        return Cart::where('id', $id)->update(['user_id' => $validated['user_id']])->toJson();
+        return CartItem::findOrFail($id)->update(['quantity' => $validated['quantity']])->toJson();
     }
 
     /**
@@ -63,6 +66,6 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        return Cart::findOrFail($id)->delete()->toJson();
+        return CartItem::findOrFail($id)->delete()->toJson();
     }
 }
