@@ -15,17 +15,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CartItem extends Model
 {
+
+    public $timestamps = true;
+
     /**
      * @var array
      */
-    protected $fillable = ['product_id', 'cart_id', 'quantity', 'created_at'];
+    protected $fillable = ['product_id', 'cart_id', 'quantity', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function cart()
     {
-        return $this->belongsTo('App\Cart');
+        return $this->belongsTo(Cart::class);
     }
 
     /**

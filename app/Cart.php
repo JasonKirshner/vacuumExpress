@@ -13,17 +13,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cart extends Model
 {
+
+    public $timestamps = true;
+
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'created_at'];
+    protected $fillable = ['user_id', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -31,6 +34,6 @@ class Cart extends Model
      */
     public function cartItems()
     {
-        return $this->hasMany('App\CartItem');
+        return $this->hasMany(CartItem::class);
     }
 }

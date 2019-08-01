@@ -16,16 +16,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
+
+    public $timestamps = true;
+
     /**
      * @var array
      */
-    protected $fillable = ['name', 'description', 'price', 'sale_price', 'img_name', 'created_at'];
+    protected $fillable = ['name', 'description', 'price', 'sale_price', 'img_name', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function cartItems()
     {
-        return $this->hasMany('App\CartItem');
+        return $this->hasMany(CartItem::class);
     }
 }
