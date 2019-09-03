@@ -32,7 +32,7 @@ class User extends Model implements Authenticatable
     /**
      * @var array
      */
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
