@@ -11,7 +11,11 @@ class ProductStoreRequest extends BaseFormRequest
      */
     public function authorize()
     {
-        return true;
+        if (Gate::allows('store-product', Auth::user())) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
